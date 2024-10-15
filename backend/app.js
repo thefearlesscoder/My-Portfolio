@@ -4,6 +4,9 @@ import cors from "cors";
 import cookieParser from 'cookie-parser';
 import fileUpload from 'express-fileupload';
 import  dbConnection  from "./database/dbConnection.js";
+import { errorMiddleware } from "./middlewares/error.js";
+import messageRouter from "./router/message.route.js";
+import userRouter from "./router/user.route.js";
 
 const app = express();
 dotenv.config({path: "./config/.env"})
@@ -23,7 +26,10 @@ app.use(fileUpload({
 }))
 
 // console.log(process.env.PORT)
+app.use("/api/v1/message", messageRouter);
+app.use("/api/v1/user", userRouter)
 
 dbConnection();
+app.use(errorMiddleware);
 
 export default app;
