@@ -13,4 +13,4 @@ const dbConnection = () => {
     });
 };
 
-export {dbConnection}
+export default dbConnection;
