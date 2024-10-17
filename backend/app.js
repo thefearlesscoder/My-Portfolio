@@ -7,6 +7,7 @@ import  dbConnection  from "./database/dbConnection.js";
 import { errorMiddleware } from "./middlewares/error.js";
 import messageRouter from "./router/message.route.js";
 import userRouter from "./router/user.route.js";
+import timelineRouter from "./router/timeline.route.js"
 
 const app = express();
 dotenv.config({path: "./config/.env"})
@@ -27,7 +28,8 @@ app.use(fileUpload({
 
 // console.log(process.env.PORT)
 app.use("/api/v1/message", messageRouter);
-app.use("/api/v1/user", userRouter)
+app.use("/api/v1/user", userRouter);
+app.use("api/v1/timeline", timelineRouter);
 
 dbConnection();
 app.use(errorMiddleware);
