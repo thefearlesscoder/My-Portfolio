@@ -2,6 +2,7 @@ import { catchAsyncErrors } from "../middlewares/catchAsyncErrors.js";
 import ErrorHandler from "../middlewares/error.js";
 import { User } from "../models/user.models.js";
 import { v2 as clodinary } from "cloudinary";
+import { generateToken } from "../utils/jwtToken.js";
 
 export const register = catchAsyncErrors(async (req, res, next) => {
   if (!req.files || Object.keys(req.files).length === 0) {
@@ -68,11 +69,7 @@ export const register = catchAsyncErrors(async (req, res, next) => {
 
   console.log("user: ", user);
 
-  res.status(201).json({
-    success: true,
-    message: "User registered successfully",
-    user,
-  });
+  generateToken(user, "User registered", 201, res);
   /* 
     
     const {fullName, email, phone, password, avatar, resume, portfolioURL, githubURL, linkedInURL, instagramURL} = req.body;
@@ -103,4 +100,28 @@ export const register = catchAsyncErrors(async (req, res, next) => {
         }})
 
     */
+});
+
+// creating user login
+
+export const login = catchAsyncErrors(async (req, res, next) => {
+  const { email, password } = req.body;
+
+  if (!email || !password) {
+    return next(new ErrorHandler("email and Password are required", 400));
+  }
+
+  const user = await User.findOne({ email }).select("+password"); //note this line
+
+  if (!user) {
+    return next(new ErrorHandler("Invalid email or password", 404));
+  }
+
+  const isPasswordMatched = await user.comparePassword(password);
+
+  if (!isPasswordMatched) {
+    return next(new ErrorHandler("Invalid email or password", 401));
+  }
+
+  generateToken(user, "User logged in", 200, res);
 });
