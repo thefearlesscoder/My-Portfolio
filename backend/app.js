@@ -9,6 +9,7 @@ import messageRouter from "./router/message.route.js";
 import userRouter from "./router/user.route.js";
 import timelineRouter from "./router/timeline.route.js"
 
+
 const app = express();
 dotenv.config({path: "./config/.env"})
 
@@ -29,7 +30,9 @@ app.use(fileUpload({
 // console.log(process.env.PORT)
 app.use("/api/v1/message", messageRouter);
 app.use("/api/v1/user", userRouter);
-app.use("api/v1/timeline", timelineRouter);
+app.use("/api/v1/timeline", timelineRouter);
+app.use("/api/v1/softwares", softwareRouter);
+
 
 dbConnection();
 app.use(errorMiddleware);

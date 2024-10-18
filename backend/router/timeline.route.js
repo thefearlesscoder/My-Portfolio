@@ -5,7 +5,7 @@ import { postTimeline, deleteTimeline, getAllTimeline } from "../controllers/tim
 
 router.post("/add", isAuthenticated, postTimeline);
 router.delete("/delete/:id", isAuthenticated, deleteTimeline);
-router.get("/getall", isAuthenticated, getAllTimeline); //global route
+router.get("/getall", getAllTimeline); //global route
 
 
 
