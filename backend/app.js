@@ -8,6 +8,7 @@ import { errorMiddleware } from "./middlewares/error.js";
 import messageRouter from "./router/message.route.js";
 import userRouter from "./router/user.route.js";
 import timelineRouter from "./router/timeline.route.js"
+import softwareRouter from "./router/software.route.js";
 
 
 const app = express();
