@@ -19,10 +19,16 @@ const userSlice = createSlice({
       state.user = {};
       state.error = null;
     },
+
     loginSuccess(state, action) {
       state.loading = false;
       state.isAuthenticated = true;
+      console.log("action: ",action);
+      console.log("action pay: ",action.payload);
+      
       state.user = action.payload;
+
+      state.message = action.message;
       state.error = null;
     },
     loginFail(state, action) {
@@ -121,13 +127,15 @@ export const login = (email, password) => async (dispatch) => {
   try {
     console.log(" inside tryy");
 
-    const data = await axios.post(
+    const response = await axios.post(
       "http://localhost:4000/api/v1/user/login",
       { email, password },
       { withCredentials: true },
       { headers: { "Content-Type": "application/json" } }
     );
-
+    const { data } = response;
+    
+    console.log("data in login function : ", data);
     console.log("data mil gya");
 
     dispatch(userSlice.actions.loginSuccess(data.user));
