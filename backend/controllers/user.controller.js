@@ -282,7 +282,10 @@ export const forgotPassword = catchAsyncErrors(async (req, res, next) => {
     user.resetPasswordToken = undefined;
     await user.save();
 
-    return next(new ErrorHandler(error.message, 500));
+    return res.status(500).json({
+      success: false,
+      message: "Failed to send email",
+    });
   }
 });
 
@@ -301,6 +304,12 @@ export const resetPassword = catchAsyncErrors(async (req, res, next) => {
       return res.status(400).json({
         success: false,
         message: "Invalid or expired token",
+      })
+    }
+    if(!req.body.password || !req.body.confirmPassword){
+      return res.status(400).json({
+        success: false,
+        message: "Please fill all required fields",
       })
     }
     if(req.body.password !== req.body.confirmPassword){
