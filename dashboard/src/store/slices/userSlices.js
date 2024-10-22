@@ -123,7 +123,7 @@ const userSlice = createSlice({
 });
 
 export const login = (email, password) => async (dispatch) => {
-  dispatch(userSlice.actions.loginRequest);
+  dispatch(userSlice.actions.loginRequest());
   try {
     console.log(" inside tryy");
 
@@ -154,7 +154,7 @@ export const login = (email, password) => async (dispatch) => {
 };
 
 export const getUser = () => async (dispatch) => {
-  dispatch(userSlice.actions.loadUserRequest);
+  dispatch(userSlice.actions.loadUserRequest());
   try {
     const { data } = await axios.get("http://localhost:4000/api/v1/user/me", {
       withCredentials: true,
@@ -221,18 +221,18 @@ export const updatePassword =
 //===================================================================
 //update profile
 export const updateProfile=
-  (data) => async (dispatch) => {
+  (newData) => async (dispatch) => {
     dispatch(userSlice.actions.updateProfileRequest());
     try {
       const { data } = await axios.put(
         "http://localhost:4000/api/v1/user/update/me",
-        data,
+        newData,
         {
           withCredentials: true,
           headers: { "Content-Type": "multipart/form-data" },
         }
       );
-      dispatch(userSlice.actions.updateProfileSuccess());
+      dispatch(userSlice.actions.updateProfileSuccess(data.message));
       dispatch(userSlice.actions.clearAllError());
     } catch (error) {
       console.log("error aya");
@@ -248,7 +248,7 @@ export const resetProfile = () =>async(dispatch) =>{
 }
 
 export const clearAllUserErrors = () => (dispatch) => {
-  dispatch(userSlice.actions.clearAllError);
+  dispatch(userSlice.actions.clearAllError());
 };
 
 export default userSlice.reducer;

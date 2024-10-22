@@ -12,6 +12,7 @@ import ManageSkills from "./pages/ManageSkills";
 import { useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { getUser } from "./store/slices/userSlices";
+import "./App.css"
 
  export const App = () =>{
 
