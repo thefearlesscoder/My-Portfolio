@@ -13,13 +13,15 @@ import { useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { getUser } from "./store/slices/userSlices";
 import "./App.css"
+import { getAllMessages } from "./store/slices/messagesSlice";
 
  export const App = () =>{
 
     const dispatch = useDispatch();
 
     useEffect(() => {
-      dispatch(getUser)
+      dispatch(getUser())
+      dispatch(getAllMessages())
     },[])
 
   return (    
