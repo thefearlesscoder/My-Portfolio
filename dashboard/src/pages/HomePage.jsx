@@ -18,7 +18,7 @@ import {
 } from "@/components/ui/sheet"
 import Dashboard from "./subComponents/Dashboard";
 import AddProject from "./subComponents/AddProject";
-import AddApplication from "./subComponents/AddApplication";
+import AddApplications from "./subComponents/AddApplication";
 import AddTimeline from "./subComponents/AddTimeline";
 import Messages from "./subComponents/Messages";
 import Account from "./subComponents/Account";
@@ -336,7 +336,7 @@ const HomePage = () => {
               return <AddSkill />;
               break;
             case "Add Uses":
-              return <AddSoftwareApplications />;
+              return <AddApplications />;
               break;
             case "Add Timeline":
               return <AddTimeline />;

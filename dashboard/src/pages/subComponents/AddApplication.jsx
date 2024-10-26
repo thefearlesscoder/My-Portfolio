@@ -10,7 +10,7 @@ import {
   resetSoftwareApplicationSlice,
 } from "@/store/slices/softwareApplicationSlice";
 
-const AddSoftwareApplications = () => {
+const AddApplications = () => {
   const [name, setName] = useState("");
   const [svg, setSvg] = useState("");
   const [svgPreview, setSvgPreview] = useState("");
@@ -157,4 +157,4 @@ const AddSoftwareApplications = () => {
   );
 };
 
-export default AddSoftwareApplications;
+export default AddApplications;

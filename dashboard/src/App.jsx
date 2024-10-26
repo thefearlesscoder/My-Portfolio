@@ -16,6 +16,7 @@ import "./App.css"
 import { getAllMessages } from "./store/slices/messagesSlice";
 import { getAllTimeline } from "./store/slices/timelineSlice";
 import { getAllSkills } from "./store/slices/skillSlice";
+import { getAllSoftwareApplications } from "./store/slices/softwareApplicationSlice";
 
  export const App = () =>{
 
@@ -26,6 +27,7 @@ import { getAllSkills } from "./store/slices/skillSlice";
       dispatch(getAllMessages())
       dispatch(getAllTimeline())
       dispatch(getAllSkills())
+      dispatch(getAllSoftwareApplications())
     },[])
 
   return (    
